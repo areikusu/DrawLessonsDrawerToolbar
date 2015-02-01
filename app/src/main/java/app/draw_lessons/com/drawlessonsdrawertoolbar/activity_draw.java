@@ -61,7 +61,7 @@ public class activity_draw extends ActionBarActivity {
                 if (!f.exists()){
                     f.mkdirs();
 
-                    nb.setSmallIcon(R.drawable.ic_launcher);
+                    nb.setSmallIcon(R.mipmap.ic_launcher);
                     nb.setContentTitle("Directorio correcto");
                     nb.setContentText("Directorio para DrawLessons creado correctamente.");
                     Uri u = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
@@ -116,7 +116,7 @@ public class activity_draw extends ActionBarActivity {
         this.canvas.setResY(y);
         this.canvas.prepareCancas();
         this.canvas.setStrokeSize(canvas.SIZE_SMALL);
-        this.canvas.setRubishIcon(R.drawable.rubish);
+        this.canvas.setRubishIcon(R.mipmap.rubish);
 
 
         this.l1.addView(canvas);
@@ -135,11 +135,11 @@ public class activity_draw extends ActionBarActivity {
         ab.setBackgroundDrawable(new ColorDrawable(0x5500AAEE));
 
         ab.setHomeButtonEnabled(true);
-        ab.setLogo(R.drawable.icondl);
+        ab.setLogo(R.mipmap.icondl);
 
 
         ab.setDisplayShowHomeEnabled(true);
-        ab.setIcon(R.drawable.icondl);
+        ab.setIcon(R.mipmap.icondl);
 
     }
 
@@ -212,21 +212,21 @@ public class activity_draw extends ActionBarActivity {
     public void addMenuActions(Menu menu){
 
         this.items[0] = menu.add(0, 0, menu.NONE, "Mano alzada");
-        this.items[0].setIcon(R.drawable.hand);
+        this.items[0].setIcon(R.mipmap.hand);
         this.items[0].setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
         this.items[1] = menu.add(0, 1, menu.NONE, "Regla Recta");
-        this.items[1].setIcon(R.drawable.ruler);
+        this.items[1].setIcon(R.mipmap.ruler);
         this.items[1].setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         this.items[1].setVisible(false);
 
         this.items[2] = menu.add(0, 2, menu.NONE, "Borrado");
-        this.items[2].setIcon(R.drawable.eraser);
+        this.items[2].setIcon(R.mipmap.eraser);
         this.items[2].setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         this.items[2].setVisible(false);
 
         this.items[3] = menu.add(0, 4, menu.NONE, "Compas");
-        this.items[3].setIcon(R.drawable.compass);
+        this.items[3].setIcon(R.mipmap.compass);
         this.items[3].setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         this.items[3].setVisible(false);
 

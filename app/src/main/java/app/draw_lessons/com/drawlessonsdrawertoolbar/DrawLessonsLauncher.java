@@ -1,13 +1,18 @@
 package app.draw_lessons.com.drawlessonsdrawertoolbar;
 
+/**
+ * Created by Aleix on 2015-02-01.
+ */
+
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,12 +20,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import static app.draw_lessons.com.drawlessonsdrawertoolbar.R.id.content_frame;
 
 public class DrawLessonsLauncher extends ActionBarActivity {
+
 	DrawerLayout mDrawerLayout;
-	RecyclerView mDrawerList;
+	ListView mDrawerList;
 	ActionBarDrawerToggle mDrawerToggle;
 	String[] mDrawerListItems;
+	FragmentManager fm;
+	Fragment frag;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,17 +37,22 @@ public class DrawLessonsLauncher extends ActionBarActivity {
 		setContentView(R.layout.activity_draw_lessons_launcher);
 		Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
 		mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer);
-		mDrawerList = (RecyclerView)findViewById(android.R.id.list);
+		mDrawerList = (ListView)findViewById(android.R.id.list);
 		mDrawerListItems = getResources().getStringArray(R.array.drawer_list);
-		mDrawerList.setAdapter(new RecyclerView.Adapter<String>(this, android.R.layout.simple_list_item_1, mDrawerListItems));
+		frag = new activity_cursos();
+		mDrawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mDrawerListItems));
 		mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				int editedPosition = position+1;
 				Toast.makeText(DrawLessonsLauncher.this, "You selected item " + editedPosition, Toast.LENGTH_SHORT).show();
+				FragmentTransaction ft;
+				ft = getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, frag);
+				ft.commit();
 				mDrawerLayout.closeDrawer(mDrawerList);
 			}
-		});mDrawerToggle = new ActionBarDrawerToggle(this,
+		});
+		mDrawerToggle = new ActionBarDrawerToggle(this,
 				mDrawerLayout,
 				toolbar,
 				R.string.drawer_open,
@@ -73,19 +87,8 @@ public class DrawLessonsLauncher extends ActionBarActivity {
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
-
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.menu_draw_lessons_launcher, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
+	public boolean onOptionsItemSelected(MenuItem item){
 		switch (item.getItemId()){
 			case android.R.id.home: {
 				if (mDrawerLayout.isDrawerOpen(mDrawerList)){
@@ -95,8 +98,7 @@ public class DrawLessonsLauncher extends ActionBarActivity {
 				}
 				return true;
 			}
-
 			default: return super.onOptionsItemSelected(item);
+		}
 	}
-}
 }

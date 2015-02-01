@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,11 +28,12 @@ public class activity_cursos extends Fragment implements MaterialTabListener {
         super.onCreate(savedInstanceState);
         View vi = inflater.inflate(R.layout.activity_cursos,container,false);
 
-        /*Toolbar toolbar = (android.support.v7.widget.Toolbar) this.findViewById(R.id.toolbar);
+       /* Toolbar toolbar = (android.support.v7.widget.Toolbar) this.findViewById(R.id.toolbar);
         this.setSupportActionBar(toolbar);*/
 
         tabHost = (MaterialTabHost) vi.findViewById(R.id.tabHost);
         pager = (ViewPager) vi.findViewById(R.id.pager);
+
 
         // init view pager
         adapter = new ViewPagerAdapter(this.getActivity().getSupportFragmentManager());

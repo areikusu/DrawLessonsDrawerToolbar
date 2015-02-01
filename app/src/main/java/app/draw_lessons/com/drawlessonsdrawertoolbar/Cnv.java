@@ -211,7 +211,7 @@ public class Cnv extends View{
         tmpP.setStyle(Paint.Style.STROKE);
         tmpP.setStrokeWidth(5);
 
-        tmpP.setColor(this.getResources().getColor(R.color.app_color));
+        tmpP.setColor(this.getResources().getColor(R.color.primary));
 
 
         switch(event.getAction()){
@@ -357,7 +357,7 @@ public class Cnv extends View{
         tmpP.setStyle(Paint.Style.STROKE);
         tmpP.setStrokeWidth(5);
 
-        tmpP.setColor(this.getResources().getColor(R.color.app_color));
+        tmpP.setColor(this.getResources().getColor(R.color.primary));
 
         double c=0.0d;
 

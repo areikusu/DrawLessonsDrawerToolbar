@@ -69,7 +69,7 @@ public class Cleaner {
 
 
         b.setTitle("Limpiar lienzo");
-        b.setIcon(c.getResources().getDrawable(R.drawable.rubish));
+        b.setIcon(c.getResources().getDrawable(R.mipmap.rubish));
 
         AlertDialog d = b.create();
         d.show();
