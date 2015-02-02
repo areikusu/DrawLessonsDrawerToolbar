@@ -23,6 +23,11 @@
                        <category android:name="android.intent.category.LAUNCHER" />
                    </intent-filter>
                </activity>
+        <activity android:name=".activity_draw"
+            android:label="Canvas"
+            android:screenOrientation="landscape">
+        </activity>
+
     </application>
 
 </manifest>
