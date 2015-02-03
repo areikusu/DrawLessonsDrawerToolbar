@@ -57,11 +57,9 @@ public class DrawLessonsLauncher extends ActionBarActivity {
                     case 0:
                         break;
                     case 1:
-//                        finish();
                         startActivity(i_cnv);
                         break;
                     case 2:
-//                        finish();
                         startActivity(i_cur);
                         break;
                     case 3:

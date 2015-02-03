@@ -29,12 +29,11 @@ import java.io.File;
 public class activity_draw extends ActionBarActivity {
 
     DrawerLayout cnvDrawerLayout;
+    String[] cnvDrawerListItems;
     ListView cnvDrawerList;
     ActionBarDrawerToggle cnvDrawerToggle;
-    String[] cnvDrawerListItems;
-    FragmentManager fm;
 
-    Fragment frag;
+
     Intent i_cnv;
     Intent i_cur;
 

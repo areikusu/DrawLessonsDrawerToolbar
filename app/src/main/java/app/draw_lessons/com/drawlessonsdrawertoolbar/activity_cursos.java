@@ -1,12 +1,16 @@
 package app.draw_lessons.com.drawlessonsdrawertoolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +25,15 @@ public class activity_cursos extends ActionBarActivity implements MaterialTabLis
     ViewPager pager;
     ViewPagerAdapter adapter;
 
+    //variables para el drawer
+    DrawerLayout curDrawerLayout;
+    ListView curDrawerList;
+    ActionBarDrawerToggle curDrawerToggle;
+    String[] curDrawerListItems;
+
+    Intent i_cnv;
+    Intent i_cur;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +41,8 @@ public class activity_cursos extends ActionBarActivity implements MaterialTabLis
 
         Toolbar toolbar = (android.support.v7.widget.Toolbar) this.findViewById(R.id.toolbar);
         this.setSupportActionBar(toolbar);
+
+        curDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_cnv);
 
         tabHost = (MaterialTabHost) this.findViewById(R.id.tabHost);
         pager = (ViewPager) this.findViewById(R.id.pager);
