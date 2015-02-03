@@ -18,12 +18,10 @@
 
 
     <string-array name="drawer_list">
-        <item>Inicio</item>
+
         <item>Lienzo</item>
         <item>Cursos</item>
-        <item>Cast</item>
+
     </string-array>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="hello_world">Hello world!</string>
 
 </resources>

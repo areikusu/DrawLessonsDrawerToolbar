@@ -44,7 +44,7 @@ public class DrawLessonsLauncher extends ActionBarActivity {
         mDrawerListItems = getResources().getStringArray(R.array.drawer_list);
 
         i_cnv = new Intent(this, activity_draw.class);
-        i_cur = new Intent(this, activity_cursos.class);
+
 
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mDrawerListItems));
 
@@ -55,12 +55,15 @@ public class DrawLessonsLauncher extends ActionBarActivity {
                 Toast.makeText(DrawLessonsLauncher.this, "You selected item " + editedPosition, Toast.LENGTH_SHORT).show();
                 switch (position) {
                     case 0:
+						finish();
+						startActivity(i_cnv);
                         break;
                     case 1:
-                        startActivity(i_cnv);
+						finish();
+						startActivity(i_cur);
                         break;
                     case 2:
-                        startActivity(i_cur);
+
                         break;
                     case 3:
                         break;

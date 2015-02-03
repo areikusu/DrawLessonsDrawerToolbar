@@ -7,8 +7,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -28,102 +26,101 @@ import java.io.File;
 
 public class activity_draw extends ActionBarActivity {
 
-    DrawerLayout cnvDrawerLayout;
-    String[] cnvDrawerListItems;
-    ListView cnvDrawerList;
-    ActionBarDrawerToggle cnvDrawerToggle;
-
-
-    Intent i_cnv;
-    Intent i_cur;
-
     private LinearLayout l1;
     private Cnv canvas;
     private MenuItem items[];
     private int AppColor = 0x5500AAEE; //color básico de la aplicacion
 
+	DrawerLayout cnvDrawerLayout;
+	String[] cnvDrawerListItems;
+	ListView cnvDrawerList;
+	ActionBarDrawerToggle cnvDrawerToggle;
+	Intent i_cnv;
+	Intent i_curso;
 
     public boolean toolClicked = true;
     public int ClickedID = 0;
-    private int doBack = 1;
+    private int doBack=1;
 
-    private String appPath = Environment.getExternalStorageDirectory().toString() + "/DrawLessons";
+    private String appPath=Environment.getExternalStorageDirectory().toString()+"/DrawLessons";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_draw);
 
-        i_cnv = new Intent(this, activity_draw.class);
-        i_cur = new Intent(this, activity_cursos.class);
+		i_cnv = new Intent(this, activity_draw.class);
+		i_curso = new Intent(this, DrawLessonsLauncher.class);
 
-        cnvDrawerListItems = getResources().getStringArray(R.array.drawer_list);
-        cnvDrawerList = (ListView) findViewById(android.R.id.list);
-        cnvDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_cnv);
+		cnvDrawerListItems = getResources().getStringArray(R.array.drawer_list);
+		cnvDrawerList = (ListView) findViewById(android.R.id.list);
+		cnvDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_cnv);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_cnv);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(false);
+		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_cnv);
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setHomeButtonEnabled(false);
 
-        cnvDrawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, cnvDrawerListItems));
-        cnvDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                int editedPosition = position + 1;
-                Toast.makeText(activity_draw.this, "You selected item " + editedPosition, Toast.LENGTH_SHORT).show();
-                FragmentTransaction ft;
-                switch (position) {
-                    case 0:
-                        break;
-                    case 1:
-                        finish();
-                        startActivity(i_cnv);
-                        break;
-                    case 2:
-                        finish();
-                        startActivity(i_cur);
-                        break;
-                    case 3:
-                        break;
-                }
+		cnvDrawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, cnvDrawerListItems));
+		cnvDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				int editedPosition = position + 1;
+				Toast.makeText(activity_draw.this, "You selected item " + editedPosition, Toast.LENGTH_SHORT).show();
+				FragmentTransaction ft;
+				switch (position) {
+					case 0:
+						finish();
+						startActivity(i_cnv);
+						break;
+					case 1:
+						finish();
+						startActivity(i_curso);
+						break;
+					case 2:
+						break;
+					case 3:
+						break;
+				}
 
-                cnvDrawerLayout.closeDrawer(cnvDrawerList);
-            }
-        });
-        cnvDrawerToggle = new ActionBarDrawerToggle(this,
-                cnvDrawerLayout,
-                toolbar,
-                R.string.drawer_open,
-                R.string.drawer_close) {
-            public void onDrawerClosed(View v) {
-                super.onDrawerClosed(v);
-                invalidateOptionsMenu();
-                syncState();
-            }
+				cnvDrawerLayout.closeDrawer(cnvDrawerList);
+			}
+		});
+		cnvDrawerToggle = new ActionBarDrawerToggle(this,
+				cnvDrawerLayout,
+				toolbar,
+				R.string.drawer_open,
+				R.string.drawer_close) {
+			public void onDrawerClosed(View v) {
+				super.onDrawerClosed(v);
+				invalidateOptionsMenu();
+				syncState();
+			}
 
-            public void onDrawerOpened(View v) {
-                super.onDrawerOpened(v);
-                invalidateOptionsMenu();
-                syncState();
-            }
-        };
-        cnvDrawerLayout.setDrawerListener(cnvDrawerToggle);
+			public void onDrawerOpened(View v) {
+				super.onDrawerOpened(v);
+				invalidateOptionsMenu();
+				syncState();
+			}
+		};
+		cnvDrawerLayout.setDrawerListener(cnvDrawerToggle);
 
-        cnvDrawerToggle.syncState();
+		cnvDrawerToggle.syncState();
+
         this.createDrawer();
-        this.items = new MenuItem[4];
-        this.prepareFolders();
 //        this.ToolbarCustom();
 
+        this.items = new MenuItem[6];
+        this.prepareFolders();
 
     }
+
 
 
     NotificationCompat.Builder nb;
 
 
-    public void prepareFolders() {
+    public void prepareFolders(){
 
         nb = new NotificationCompat.Builder(this);
 
@@ -133,7 +130,7 @@ public class activity_draw extends ActionBarActivity {
             public void run() {
 
                 File f = new File(appPath);
-                if (!f.exists()) {
+                if (!f.exists()){
                     f.mkdirs();
 
                     nb.setSmallIcon(R.mipmap.ic_launcher);
@@ -141,7 +138,7 @@ public class activity_draw extends ActionBarActivity {
                     nb.setContentText("Directorio para DrawLessons creado correctamente.");
                     Uri u = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-                    NotificationManager nmc = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                    NotificationManager nmc = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
 
                     nmc.notify(1, nb.build());
 
@@ -158,12 +155,11 @@ public class activity_draw extends ActionBarActivity {
      * Método que comprueba la versión del S.O
      * y si es superior a las versiones más bajas
      * aumenta la calidad del dibujo.
-     *
      * @param c
      */
-    public void getVersion(Cnv c) {
-        int v = Integer.valueOf(Build.VERSION.SDK_INT);
-        if (v >= 17) {
+    public void getVersion(Cnv c){
+        int v= Integer.valueOf(Build.VERSION.SDK_INT);
+        if (v >= 17){
             //si la version de android es inferior a el nivel de API 17, se reduce la calidad
             // del dibujo.
             c.ImproveQuality();
@@ -178,12 +174,12 @@ public class activity_draw extends ActionBarActivity {
      * prepara el Objeto de Cnv, para poder dibujar, y le da un Tamaño al Objeto Paint o pincel.
      * Agrega al layout recogido, el Objeto de tipo Cnv a forma de Objeto View
      */
-    public void createDrawer() {
+    public void createDrawer(){
 
         int x = this.getWindowManager().getDefaultDisplay().getWidth(); //resolucion del ancho de la pantalla
         int y = this.getWindowManager().getDefaultDisplay().getHeight(); // resolucion del alto de la pantalla
 
-        this.l1 = (LinearLayout) this.findViewById(R.id.LinearLCnv1);
+        this.l1 =(LinearLayout)this.findViewById(R.id.LinearLCnv1);
 
 
         this.canvas = new Cnv(this);
@@ -192,7 +188,7 @@ public class activity_draw extends ActionBarActivity {
         this.canvas.setResY(y);
         this.canvas.prepareCancas();
         this.canvas.setStrokeSize(canvas.SIZE_SMALL);
-        this.canvas.setRubishIcon(R.mipmap.rubish);
+       // this.canvas.setRubishIcon(R.drawable.rubish);
 
 
         this.l1.addView(canvas);
@@ -201,24 +197,26 @@ public class activity_draw extends ActionBarActivity {
     }
 
 
-    /**
+/*
+    */
+/**
      * Metodo para gestionar
      * la personalización de la barra de
-     * tareas
-     */
-    public void ToolbarCustom() {
+     * tareas deprecated
+     *//*
 
-       /* android.support.v7.app.ActionBar ab = this.getSupportActionBar();
+    public void ToolbarCustom(){
+        android.support.v7.app.ActionBar ab = this.getSupportActionBar();
         ab.setBackgroundDrawable(new ColorDrawable(0x5500AAEE));
 
         ab.setHomeButtonEnabled(true);
-        ab.setLogo(R.mipmap.icondl);
-
+        ab.setLogo(R.drawable.icondl);
 
         ab.setDisplayShowHomeEnabled(true);
-        ab.setIcon(R.mipmap.icondl);*/
+        ab.setIcon(R.drawable.icondl);
 
     }
+*/
 
 
     /**
@@ -240,49 +238,49 @@ public class activity_draw extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         this.addMenuItems(item);
-
         return super.onOptionsItemSelected(item);
     }
+
+
 
     /**
      * Oculta todos los elementos del menu
      * menos el indicado por parametro
-     *
      * @param h
      */
-    public void hide(int h) {
+    public void hide(int h){
 
-        for (int i = 0; i < this.items.length; i++) {
-            if (this.items[i] != null) {
-                if (this.items[i].getItemId() != h) {
-                    this.items[i].setVisible(false);
-                }
+        for (int i=0;i<this.items.length;i++){
+            if (this.items[i]!=null){
+                if (this.items[i].getItemId()!=h){ this.items[i].setVisible(false); }
             }
         }
-
     }
+
 
 
     /**
      * Des-Oculta todos los elemenos
      * del menu
      */
-    public void UnHide() {
-        for (int i = 0; i < this.items.length; i++) {
-            if (this.items[i] != null) {
+    public void UnHide(){
+        for (int i=0; i<this.items.length; i++) {
+            if(this.items[i]!=null){
                 this.items[i].setVisible(true);
             }
         }
     }
 
 
+   public static MenuItem i1;
+   public static MenuItem i2;
+
     /**
      * Metodo para añadir menus a la
      * Barra de acion del activity
-     *
      * @param menu
      */
-    public void addMenuActions(Menu menu) {
+    public void addMenuActions(Menu menu){
 
         this.items[0] = menu.add(0, 0, menu.NONE, "Mano alzada");
         this.items[0].setIcon(R.mipmap.hand);
@@ -303,69 +301,112 @@ public class activity_draw extends ActionBarActivity {
         this.items[3].setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         this.items[3].setVisible(false);
 
-        menu.add(0, 3, menu.NONE, "Limpiar").setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-        menu.add(0, 5, menu.NONE, "Guardar").setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-        menu.add(0, 6, Menu.NONE, "Deshacer").setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+
+        this.i1 = menu.add(0,7, Menu.NONE, "Aceptar");
+        i1.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        i1.setIcon(R.mipmap.check);
+        i1.setVisible(false);
+
+        this.i2 = menu.add(0,8, Menu.NONE, "Rechazar");
+        i2.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        i2.setIcon(R.mipmap.delete);
+        i2.setVisible(false);
+
+        menu.add(0,3, menu.NONE, "Limpiar").setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        menu.add(0,5, menu.NONE, "Guardar").setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        menu.add(0,6, Menu.NONE, "Deshacer").setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+
+
     }
+
 
 
     /**
      * Metodo para añadir acciones de control a los items
      * de los Menus de la actionBar
-     *
      * @param item
      */
-    public void addMenuItems(MenuItem item) {
+    public void addMenuItems(MenuItem item){
         int id = item.getItemId();
 
-        if (id == 2) {
+        if(id == 2){
             Tools.useEraser(this.canvas);
             this.ClickedID = id;
-        }
-        if (id == 1) {
+        }if (id == 1){
             Tools.useRuler(this.canvas);
             this.ClickedID = id;
-        }
-        if (id == 0) {
+        }if (id == 0){
             Tools.useHand(this.canvas);
             this.ClickedID = id;
-        }
-        if (id == 4) {
+        }if (id == 4){
             Tools.useCompass(this.canvas);
             this.ClickedID = id;
         }
 
-        if (id != 3 && id != 5 && id != 6) {
-            if (this.toolClicked == true) {
+        if ( id !=3
+                && id !=5
+                && id !=6
+                && id !=7
+                && id !=8){
+
+            if (this.toolClicked==true){
                 this.UnHide();
-                this.toolClicked = false;
-            } else {
+                this.toolClicked=false;
+            }
+            else{
                 this.hide(id);
-                this.toolClicked = true;
+                this.toolClicked=true;
             }
         }
 
-        if (id == 3) {
+        if (id == 3){
 
             Cleaner c = new Cleaner(this, this.canvas);
             c.cleanCanvas();
-
         }
 
 
         if (id == 5) {
-            Saver s = new Saver(canvas.getBitmapt());
-            s.Save();
-            Toast.makeText(getBaseContext(), "Saved Image", Toast.LENGTH_SHORT).show();
+              Saver s = new Saver(canvas.getBitmapt());
+              s.Save();
+              Toast.makeText(getBaseContext(),"Saved Image", Toast.LENGTH_SHORT).show();
         }
 
 
-        if (item.getItemId() == 6) {
+        if (item.getItemId() == 6){
             this.canvas.Undo();
         }
 
 
+        //Aceptar o rechazar Trazo
+        if(item.getItemId() == 7){
+
+            if(ClickedID==4){
+                if(!this.canvas.getCircleFixed()) {
+                    this.canvas.acceptCompassRadius();
+                }else{
+                    this.canvas.acceptCompas();
+                }
+            }else {
+                this.canvas.acceptDraw();
+            }
+        }
+        if(item.getItemId() == 8){
+
+            if(ClickedID==4){
+                if(!this.canvas.getCircleFixed()) {
+                    this.canvas.dismissCompassRadius();
+                }else{
+                    this.canvas.dismissCompass();
+                }
+            }else {
+                this.canvas.dismissDraw();
+            }
+        }
+
     }
+
+
 
 
     @Override
@@ -380,6 +421,10 @@ public class activity_draw extends ActionBarActivity {
         super.onRestoreInstanceState(savedInstanceState);
         this.canvas.restorePaths();
     }
+
+
+
+
 
 
 }

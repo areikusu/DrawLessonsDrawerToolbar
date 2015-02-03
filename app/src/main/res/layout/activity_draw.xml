@@ -5,8 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.draw_lessons.app.activities.activity_draw">
-
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_cnv"
         android:layout_width="match_parent"
