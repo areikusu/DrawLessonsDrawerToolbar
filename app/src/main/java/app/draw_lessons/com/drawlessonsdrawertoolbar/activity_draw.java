@@ -35,7 +35,8 @@ public class activity_draw extends ActionBarActivity {
     FragmentManager fm;
 
     Fragment frag;
-    Intent i;
+    Intent i_cnv;
+    Intent i_cur;
 
     private LinearLayout l1;
     private Cnv canvas;
@@ -53,17 +54,20 @@ public class activity_draw extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_draw);
-        frag = new activity_cursos();
-        i = new Intent(this, activity_draw.class);
+
+        i_cnv = new Intent(this, activity_draw.class);
+        i_cur = new Intent(this, activity_cursos.class);
+
         cnvDrawerListItems = getResources().getStringArray(R.array.drawer_list);
+        cnvDrawerList = (ListView) findViewById(android.R.id.list);
+        cnvDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_cnv);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_cnv);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(false);
 
-
-        /*cnvDrawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_2, cnvDrawerListItems));
+        cnvDrawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, cnvDrawerListItems));
         cnvDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -74,17 +78,17 @@ public class activity_draw extends ActionBarActivity {
                     case 0:
                         break;
                     case 1:
-                        startActivity(i);
-
+                        finish();
+                        startActivity(i_cnv);
                         break;
                     case 2:
-                        frag = new activity_cursos();
+                        finish();
+                        startActivity(i_cur);
                         break;
                     case 3:
                         break;
                 }
-                ft = getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, frag);
-                ft.commit();
+
                 cnvDrawerLayout.closeDrawer(cnvDrawerList);
             }
         });
@@ -107,7 +111,7 @@ public class activity_draw extends ActionBarActivity {
         };
         cnvDrawerLayout.setDrawerListener(cnvDrawerToggle);
 
-        cnvDrawerToggle.syncState();*/
+        cnvDrawerToggle.syncState();
         this.createDrawer();
         this.items = new MenuItem[4];
         this.prepareFolders();

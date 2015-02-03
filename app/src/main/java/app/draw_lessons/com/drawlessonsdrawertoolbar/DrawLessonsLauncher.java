@@ -30,7 +30,8 @@ public class DrawLessonsLauncher extends ActionBarActivity {
     FragmentManager fm;
     Fragment frag;
     FragmentTransaction ft;
-    Intent i;
+    Intent i_cur;
+    Intent i_cnv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +42,10 @@ public class DrawLessonsLauncher extends ActionBarActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         mDrawerList = (ListView) findViewById(android.R.id.list);
         mDrawerListItems = getResources().getStringArray(R.array.drawer_list);
-        i = new Intent(this, activity_draw.class);
-        frag = new activity_cursos();
+
+        i_cnv = new Intent(this, activity_draw.class);
+        i_cur = new Intent(this, activity_cursos.class);
+
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mDrawerListItems));
 
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -54,12 +57,12 @@ public class DrawLessonsLauncher extends ActionBarActivity {
                     case 0:
                         break;
                     case 1:
-                        startActivity(i);
+//                        finish();
+                        startActivity(i_cnv);
                         break;
                     case 2:
-                        ft = getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, frag);
-                        ft.commit();
-                        mDrawerLayout.closeDrawer(mDrawerList);
+//                        finish();
+                        startActivity(i_cur);
                         break;
                     case 3:
                         break;

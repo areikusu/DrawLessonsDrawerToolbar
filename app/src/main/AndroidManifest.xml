@@ -27,6 +27,10 @@
             android:label="Canvas"
             android:screenOrientation="landscape">
         </activity>
+        <activity android:name=".activity_cursos"
+            android:label="cursos"
+            android:screenOrientation="landscape">
+        </activity>
 
     </application>
 
